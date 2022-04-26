@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::group('v1', function () {
-    Route::group('user', function () {
-        Route::post('register', [\App\Http\Controllers\Api\UserController::class, 'register']);
+Route::prefix('v1')->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::post('register', [App\Http\Controllers\Api\UserController::class, 'register']);
+        Route::post('login', [App\Http\Controllers\Api\UserController::class, 'login']);
     });
 });
